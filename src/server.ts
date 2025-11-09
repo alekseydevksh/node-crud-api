@@ -4,7 +4,7 @@ import { handleRequest } from './app';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8000;
+const PORT = Number.parseInt(process.env.PORT || '8000', 10);
 const server = http.createServer(handleRequest);
 
 server.listen(PORT, () => {
@@ -27,4 +27,3 @@ process.on('SIGINT', () => {
     process.exit(0);
   });
 });
-
