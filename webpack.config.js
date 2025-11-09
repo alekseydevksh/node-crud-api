@@ -5,6 +5,7 @@ module.exports = {
   mode: 'production',
   entry: {
     server: './src/server.ts',
+    cluster: './src/cluster.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

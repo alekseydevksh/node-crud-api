@@ -1,7 +1,7 @@
 import { User } from '../types/user';
 
 class InMemoryDB {
-  readonly users: Map<string, User> = new Map();
+  private users: Map<string, User> = new Map();
 
   async getAll(): Promise<User[]> {
     return Array.from(this.users.values());
@@ -23,6 +23,21 @@ class InMemoryDB {
 
   async delete(id: string): Promise<boolean> {
     return this.users.delete(id);
+  }
+
+  // For cluster mode
+  getAllData(): Record<string, User> {
+    return Object.fromEntries(this.users);
+  }
+
+  setAllData(data: Record<string, User>): void {
+    this.users = new Map(Object.entries(data));
+  }
+
+  mergeData(data: Record<string, User>): void {
+    for (const [id, user] of Object.entries(data)) {
+      this.users.set(id, user);
+    }
   }
 }
 
