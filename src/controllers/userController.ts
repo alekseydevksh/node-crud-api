@@ -1,7 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { userService } from '../services/userService';
-import { isValidUUID, validateCreateUserDto, AppError } from '../utils/validation';
-import { UpdateUserDto } from '../types/user';
+import { isValidUUID, validateCreateUserDto, validateUpdateUserDto, AppError } from '../utils/validation';
 
 export class UserController {
   async getAllUsers(_req: IncomingMessage, res: ServerResponse): Promise<void> {
@@ -38,14 +37,12 @@ export class UserController {
     }
 
     const body = await this.parseBody(req);
-    const updateData = body as UpdateUserDto;
 
-    // Validate that at least some fields are provided and valid
-    if (!updateData || typeof updateData !== 'object') {
-      throw new AppError(400, 'Invalid request body');
+    if (!validateUpdateUserDto(body)) {
+      throw new AppError(400, 'Invalid request body. Fields must be: username (string), age (number), hobbies (string[])');
     }
 
-    const updatedUser = await userService.updateUser(id, updateData);
+    const updatedUser = await userService.updateUser(id, body);
     this.sendJSON(res, 200, updatedUser);
   }
 
