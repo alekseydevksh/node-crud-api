@@ -1,0 +1,28 @@
+{
+  "name": "node-crud-api",
+  "version": "1.0.0",
+  "description": "https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=24.10.0"
+  },
+  "main": "dist/server.js",
+  "keywords": [
+    "crud",
+    "api",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "alekseydevksh",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.2",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
